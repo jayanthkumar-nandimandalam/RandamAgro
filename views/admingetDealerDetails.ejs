@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Randam</title>
+    <link rel="stylesheet" href="/css/commonDBstyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #696969;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #c0fdf0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cover-spin"></div>
+    <!-- partial:index.partial.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sen&display=swap" rel="stylesheet">
+
+    <div class="app">
+        <div class="sidebar">
+
+            <a href="/admin/home" style="text-decoration: none;">
+                <div class="button "><span class="material-icons">home</span>Home</div>
+            </a>
+            <div class="title">Delivery Details</div>
+            <a href="/admin/addDelivery" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">post_add</span>Add Delivery</div>
+            </a>
+            <a href="/admin/getDelivery" style="text-decoration: none;">
+                <div class="button "><span class="material-icons">get_app</span>Get Delivery</div>
+            </a>
+            <div class="title">Person Details</div>
+            <a href="/admin/getEmployee" style="text-decoration: none;">
+
+                <div class="button" id="empButton"><span class="material-icons">badge</span> Employee Details</div>
+            </a>
+            <a href="/admin/getDealer" style="text-decoration: none;">
+                <div class="button active"><span class="material-icons">contact_mail</span> Dealer Details</div>
+            </a>
+            <div class="title">SignOut </div>
+            <a href="/admin/logout" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">logout</span> SignOut Now</div>
+            </a>
+        </div>
+        <% var dealer %>
+            <div class="main" style="height: 200px;">
+                <div class="main-header">
+                    Get Dealer Details
+                </div>
+                <div class="main-body">
+                    <form method="POST" action="/getDealer">
+                        <div class="main-body-row">
+                            <div class="main-body-row-container">
+                                <span class="material-icons">badge</span>
+                                <input class="main-body-input" name="id" type="text" id="dealerid" required>
+                            </div>
+                        </div>
+
+                        <div class="main-body-row">
+                            <input type="submit" style="border: none;" onclick="$('#cover-spin').show(0)" class="main-body-button" value="Get Dealer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="main" style="width: 70%;" id="table4Div">
+                <div class="main-header">
+                    <center>Dealer Details</center>
+                </div>
+                <% if(dealer != undefined && dealer != "No details found" && dealer != "Deleted Successfully" && dealer != "Deletion Failed") { %>
+                    <center>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th> Added By</th>
+                                    <th>Dealer Id</th>
+                                    <th>Dealer Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Location</th>
+                                    <th>Remove Dealer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        <%= dealer.id %>
+                                    </th>
+                                    <th>
+                                        <%= dealer.dId %>
+                                    </th>
+                                    <th>
+                                        <%= dealer.name %>
+                                    </th>
+                                    <th>
+                                        <%= dealer.phone %>
+                                    </th>
+                                    <th>
+                                        <%= dealer.location %>
+                                    </th>
+                                    <th>
+                                        <form action="/deleteDealer" method="POST">
+                                            <input type="hidden" name="id" id="empid">
+                                            <p id="did" hidden>
+                                                <%= dealer.dId %>
+                                            </p>
+                                            <script>
+                                                document.getElementById("empid").value = document.getElementById("did").innerHTML.trim();
+                                            </script>
+                                            <input type="submit" value="Remove Dealer" style="color: white; background: tomato;">
+                                        </form>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <% dealer = undefined %>
+                    </center>
+                    <% } %>
+                        <% if(dealer != undefined && dealer == "No details found" ) { %>
+                            <center>
+                                <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">No details found with the selected Dealer Id</p>
+                            </center>
+                            <% dealer = undefined %>
+                                <% }%>
+
+                                    <% if(dealer == "Deleted Successfully" ) { %>
+                                        <center>
+                                            <p id="errorMsg" style="color: Green; font-style: bold; font-size: larger;">Dealer Deleted Successfully</p>
+                                        </center>
+                                        <% dealer = undefined %>
+                                            <% }%>
+                                                <% if(dealer == "Deletion Failed" ) { %>
+                                                    <center>
+                                                        <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">Failed to delete Dealer</p>
+                                                    </center>
+                                                    <% dealer = undefined %>
+                                                        <% }%>
+
+                                                            <div class="main-body">
+                                                                <div class="main-body-row">
+
+                                                                    <table id="dealerTable">
+
+                                                                    </table>
+
+                                                                </div>
+                                                                <div class="main-body-row">
+
+
+                                                                </div>
+
+                                                            </div>
+            </div>
+
+
+    </div>
+    <!-- partial -->
+    <script src="/js/getdealer.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="employee/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head>
+<body>
+    <div class="header">
+        <a href="#" class="logo" >CompanyLogo</a>
+        
+    </div>
+
+    <div class="tab">
+        <a href="/emphome" style="text-decoration: none;">Home</a>
+        <a href="/empaddDeliveryDetails"style="text-decoration: none;" >Add Delivery</a>
+        
+        <a  href="/employeelogin" style="text-decoration: none;">Logout</a>
+    </div>
+
+  <div class="tabcontent">
+     <center> <h2>User profile details</h2><br><br>
+      <table style="width: 50%;padding: 20px;" >
+        <tr><img src="employee/profile.png" width="150px" height="150px" style="margin-right: 100px;"> </tr>
+          <tr><td>Name </td>
+            <td>:</td>
+        <td><%= emp.name %> </td>
+        </tr>
+        <tr><td>Employee Id </td>
+            <td>:</td>
+           <td><%= emp.eId %></td>
+        </tr>
+        <tr><td>PhoneNumber </td>
+            <td>:</td>
+        <td><%= emp.phone %> </td>
+        </tr>
+        
+      </table></center>
+  </div>  
+
+</body>
+
+</html>

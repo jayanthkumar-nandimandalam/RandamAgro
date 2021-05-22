@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Randam</title>
+    <link rel="stylesheet" href="/css/commonDBstyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #696969;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #c0fdf0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="cover-spin"></div>
+    <!-- partial:index.partial.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sen&display=swap" rel="stylesheet">
+
+    <div class="app">
+        <div class="sidebar">
+            <a href="/admin/home" style="text-decoration: none;">
+                <div class="button "><span class="material-icons">home</span>Home</div>
+            </a>
+            <div class="title">Delivery Details</div>
+            <a href="/admin/addDelivery" style="text-decoration: none;">
+                <div class="button active"><span class="material-icons">post_add</span>Add Delivery</div>
+            </a>
+            <a href="/admin/getDelivery" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">get_app</span>Get Delivery</div>
+            </a>
+            <div class="title">Person Details</div>
+            <a href="/admin/getEmployee" style="text-decoration: none;">
+
+                <div class="button" id="empButton"><span class="material-icons">badge</span> Employee Details</div>
+            </a>
+            <a href="/admin/getDealer" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">contact_mail</span> Dealer Details</div>
+            </a>
+            <div class="title">SignOut </div>
+            <a href="/admin/logout" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">logout</span> SignOut Now</div>
+            </a>
+        </div>
+
+        <div class="main" style="height: 300px;">
+            <div class="main-header">
+                Add Delivery Details
+            </div>
+            <div class="main-body">
+                <div class="main-body-row">
+                    <div class="main-body-row-container">
+                        <span class="material-icons">inventory_2</span>
+                        <select name="product" id="product_name" style="width: 100%;border: none;" required>
+                            <option value="SelectProduct">Select Product</option>
+                            <option value="M-Clime">M-Clime</option>
+                            <option value="Bolt">Bolt</option>
+                            <option value="Recharge">Recharge</option>
+                            <option value="Larvin">Larvin x</option>
+                            <option value="Trace">Trace</option>
+                            <option value="Wonder plus">Wonder plus</option>
+                            <option value="Appolo super">Appolo super</option>
+                            <option value="Sizer m">Slant m</option>
+                            <option value="I fly">I fly</option>
+                            <option value="Stromp">Stromp</option>
+                            <option value="Expro">Expro</option>
+                            <option value="Trace plus">Trace plus</option>
+                            <option value="Acadia-sc">Acadia-sc</option>
+                            <option value="Randammycin">Randammycin </option>
+                            <option value="Star Gold">Star Gold</option>
+                            <option value="Randax">Randax</option>
+                            <option value="Ultra Fast GR">Ultra Fast GR</option>
+                            <option value="Fruit Sizer GR">Fruit sizerr GR</option>
+                            <option value="Dhaman Gold GR">Dhaman Gold GR</option>
+                            <option value="Dhaman Gold Ferti">Dhaman Gold Ferti</option>
+                            <option value="Ultra Fast">Ultra Fast</option>
+                            <option value="Ultra soil x">Ultra soil x</option>
+                            <option value="Fruit Sizer">Fruit Sizer</option>
+                            <option value="Oxygen">Oxygen</option>
+                            <option value="Nutri Neem">Nutri Neem</option>
+                            <option value="Nutri Agro Max">Nutri Agro Max</option>
+                            <option value="Nutri Micro Food">Nutri Micro Food</option>
+                            <option value="Nutri Borox">Nutri Borox</option>
+                            <option value="Nutri CB Max">Nutri CB Max</option>
+                            <option value="Nutri zinc Max">Nutri zinc Max</option>
+                            <option value="Nutri Mahadhan Max">Nutri Mahadhan Max</option>
+                            <option value="Nutri Potash">Nutri Potash</option>
+                            <option value="Nutri Agro Max power">Nutri Agro Max power</option>
+                            <option value="Nutri Multi Max">Nutri Multi Max</option>
+                            <option value="Nutri Zn Max">Nutri Zn Max</option>
+                            <option value="Nutri Mg Max">Nutri Mg Max</option>
+                            <option value="Nutri Magnesium Max">Nutri Magnesium Max</option>
+                            <option value="Nutri Ferro Max">Nutri Ferro Max</option>
+                            <option value="Nutri Calcium Max">Nutri Calcium Max</option>
+                            <option value="Nutri Manganese Max">Nutri Manganese Max</option>
+                            <option value="Nutri Copper Max">Nutri Copper Max</option>
+                            <option value="Nutri Cobalt Max">Nutri Cobalt Max</option>
+                            <option value="Random Borox">Random Borox</option>
+                            <option value="Random MG max">Random MG max</option>
+                            <option value="Random Sulpha Max">Random Sulpha Max</option>
+                            <option value="Random Zn Max">Random Zn Max</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="main-body-row">
+                    <div class="main-body-row-container">
+                        <span class="material-icons">grass</span>
+                        <select name="capacity" id="capacity" style="width: 100%;border: none;" required>
+                            <option value="selectcapacity">Select capacity </option>
+                            <option value="0.5 liter">0.5 liter </option>
+                            <option value="1 liter">1 liter </option>
+                            <option value="1.5 liters">1.5 liters </option>
+                            <option value="2 liters">2 liters </option>
+                            <option value="2.5 liters">2.5 liters </option>
+                            <option value="3 liters">3 liters </option>
+                            <option value="3.5 liters">3.5 liters </option>
+                            <option value="4 liters">4 liters </option>
+                            <option value="4.5 liters">4.5 liters </option>
+                            <option value="5 liters">5 liters </option>
+                            <option value="1/2 kg"> 1/2 kg </option>
+                            <option value="1 kg"> 1 kg </option>
+                            <option value="1.5 kg"> 1.5 kg </option>
+                            <option value="2 kg"> 2 kg </option>
+                            <option value="2.5 kg"> 2.5 kg </option>
+                            <option value="3 kg"> 3 kg </option>
+                            <option value="3.5 kg"> 3.5 kg </option>
+                            <option value="4 kg"> 4 kg </option>
+                            <option value="4.5 kg"> 4.5 kg </option>
+                            <option value="5 kg"> 5 kg </option>
+                          </select>
+                    </div>
+                </div>
+                <div class="main-body-row">
+                    <div class="main-body-row-container">
+                        <span class="material-icons">grass</span>
+                        <input class="main-body-input" type="number" id="quantity" placeholder="Enter Quantity" required>
+                    </div>
+                </div>
+
+                <div class="main-body-row">
+                    <div class="main-body-button" onclick="addProduct()">Add product</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main" style="width: 70%;" id="listBody">
+            <div class="main-header">
+                <center>Products Delivery Details</center>
+
+                <% if(deliveryStatus != undefined && deliveryStatus == "Failed To add Delivery" ) { %>
+                    <center>
+                        <p id="errorMsg" style="color: tomato; margin-top: 15%;font-style: bold; font-size: larger;">Failed To add Delivery</p>
+                    </center>
+                    <% }%>
+                        <% if(deliveryStatus != undefined && deliveryStatus == "Delivery Added SuccessFully" ) { %>
+                            <center>
+                                <p id="successMsg" style="color: green;margin-top: 15%; font-style: bold; font-size: larger;">Delivery Added SuccessFully</p>
+                            </center>
+                            <% }%>
+                                <% deliveryStatus = undefined %>
+            </div>
+            <div class="main-body" id="listdiv">
+                <div class="main-body-row">
+
+
+
+                    <table id="deliveryTable">
+
+                    </table>
+
+                </div>
+                <form action="/addDelivery" method="POST">
+                    <div class="main-body-row">
+                        <div class="main-body-row-container">
+                            <span class="material-icons">person</span>
+                            <input class="main-body-input" type="text" name="name" placeholder="Customer Name" required>
+                        </div>
+                    </div>
+                    <div class="main-body-row">
+                        <div class="main-body-row-container">
+                            <span class="material-icons">phone</span>
+                            <input class="main-body-input" type="tel" name="phone" placeholder="Enter Phone Number" required>
+                        </div>
+                    </div>
+                    <input type="hidden" id="deliveryValue" name="deliveryValue">
+
+                    <div class="main-body-row">
+                        <input type="submit" class="main-body-button" style="border: none;" onclick="$('#cover-spin').show(0)" id="addDelivery" value="Add Delivery">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- partial -->
+    <script src="/js/addproductadmin.js"></script>
+</body>
+
+</html>

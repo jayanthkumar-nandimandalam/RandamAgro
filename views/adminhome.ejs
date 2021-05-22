@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Randam</title>
+    <link rel="stylesheet" href="/css/commonDBstyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sen&display=swap" rel="stylesheet">
+    <div id="cover-spin"></div>
+    <div class="app">
+        <div class="sidebar">
+
+            <a href="/admin/home" style="text-decoration: none;">
+                <div class="button active"><span class="material-icons">home</span>Home</div>
+            </a>
+            <div class="title">Delivery Details</div>
+            <a href="/admin/addDelivery" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">post_add</span>Add Delivery</div>
+            </a>
+            <a href="/admin/getDelivery" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">get_app</span>Get Delivery</div>
+            </a>
+            <div class="title">Person Details</div>
+            <a href="/admin/getEmployee" style="text-decoration: none;">
+
+                <div class="button" id="empButton"><span class="material-icons">badge</span> Employee Details</div>
+            </a>
+            <a href="/admin/getDealer" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">contact_mail</span> Dealer Details</div>
+            </a>
+            <div class="title">SignOut </div>
+            <a href="/admin/logout" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">logout</span> SignOut Now</div>
+            </a>
+        </div>
+        <div class="main">
+            <div class="main-header">
+                <center> Randam Agro Chemicals</center>
+            </div>
+            <div class="main-body">
+                <div class="main-body-row">
+
+                    <img src="https://i.pinimg.com/564x/9a/0d/07/9a0d07ba169c7942620d6c1d910c5301.jpg" width="200px" height="200px">
+
+                </div>
+                <div class="main-body-row">
+                    <center> Biosafety Institute for Genetically Modified Agricultural Products
+                    </center>
+                </div>
+            </div>
+        </div>
+        <div class="main" id="empDetails">
+
+            <div class="main-header" style="text-align: center;">
+                Add Employee Details
+            </div>
+
+            <% if(empAdd != undefined && empAdd == "Employee Added SuccessFully") { %>
+                <center>
+                    <p id="errorMsg" style="color: Green; font-style: bold; font-size: larger;">Employee Added SuccessFully</p>
+                </center>
+                <% }%>
+
+                    <% if(empAdd != undefined && empAdd == "Failed to add employee") { %>
+                        <center>
+                            <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">Failed to add employee</p>
+                        </center>
+                        <% }%>
+
+                            <div class="main-body">
+                                <form action="/admin/addemployee" method="POST">
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">face</span>
+                                            <input class="main-body-input" type="text" name="name" placeholder="Employee Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">assignment_ind</span>
+                                            <input class="main-body-input" type="text" name="empId" placeholder="Employee Id" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">phone</span>
+                                            <input class="main-body-input" type="text" name="phonenumber" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">fmd_good</span>
+                                            <input class="main-body-input" type="text" name="location" placeholder="Location" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">lock</span>
+                                            <input class="main-body-input" type="password" name="password" placeholder="Password" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <input type="submit" class="main-body-button" style="border: none;" onclick="$('#cover-spin').show(0)" value="Register Employee">
+                                    </div>
+                                </form>
+                            </div>
+        </div>
+
+        <div class="main" id="dealerDetails">
+            <div class="main-header" style="text-align: center;">
+                Add Dealer Details
+            </div>
+            <% if(dealerAdd != undefined && dealerAdd == "Dealer Added SuccessFully") { %>
+                <center>
+                    <p id="errorMsg" style="color: Green; font-style: bold; font-size: larger;">Dealer Added SuccessFully</p>
+                </center>
+                <% }%>
+
+                    <% if(dealerAdd != undefined && dealerAdd == "Failed to add Dealer") { %>
+                        <center>
+                            <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">Failed to add Dealer</p>
+                        </center>
+                        <% }%>
+
+                            <div class="main-body">
+                                <form action="/admin/adddealer" method="POST">
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">face</span>
+                                            <input class="main-body-input" type="text" name="name" placeholder="Dealer Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">assignment_ind</span>
+                                            <input class="main-body-input" type="text" name="dId" placeholder="Dealer Id" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">phone</span>
+                                            <input class="main-body-input" type="text" name="phone" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <div class="main-body-row">
+                                        <div class="main-body-row-container">
+                                            <span class="material-icons">fmd_good</span>
+                                            <input class="main-body-input" type="text" name="location" placeholder="Location" required>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="loginId" name="loginId">
+                                    <div class="main-body-row">
+                                        <input type="submit" class="main-body-button" style="border: none;" onclick="$('#cover-spin').show(0)" value="Register Dealer">
+                                    </div>
+                                </form>
+                            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="/js/adminhome.js"></script>
+
+</html>

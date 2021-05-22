@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Randam</title>
+    <link rel="stylesheet" href="/css/commonDBstyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #696969;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="cover-spin"></div>
+    <!-- partial:index.partial.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sen&display=swap" rel="stylesheet">
+
+    <div class="app">
+        <div class="sidebar">
+            <a href="/admin/home" style="text-decoration: none;">
+                <div class="button "><span class="material-icons">home</span>Home</div>
+            </a>
+            <div class="title">Delivery Details</div>
+            <a href="/admin/addDelivery" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">post_add</span>Add Delivery</div>
+            </a>
+            <a href="/admin/getDelivery" style="text-decoration: none;">
+                <div class="button active"><span class="material-icons">get_app</span>Get Delivery</div>
+            </a>
+            <div class="title">Person Details</div>
+            <a href="/admin/getEmployee" style="text-decoration: none;">
+
+                <div class="button" id="empButton"><span class="material-icons">badge</span> Employee Details</div>
+            </a>
+            <a href="/admin/getDealer" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">contact_mail</span> Dealer Details</div>
+            </a>
+            <div class="title">SignOut </div>
+            <a href="/admin/logout" style="text-decoration: none;">
+                <div class="button"><span class="material-icons">logout</span> SignOut Now</div>
+            </a>
+        </div>
+
+        <div class="main" style="height: 200px;">
+            <div class="main-header">
+                Get Delivery Details
+            </div>
+            <div class="main-body">
+                <form action="/getDelivery" method="POST">
+                    <div class="main-body-row">
+                        <div class="main-body-row-container">
+                            <span class="material-icons">date_range</span>
+                            <input class="main-body-input" type="date" name="date" id="date" required>
+                        </div>
+                    </div>
+
+                    <div class="main-body-row">
+                        <input type="submit" style="border: none;" onclick="$('#cover-spin').show(0)" value="Get Deliveries" class="main-body-button">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="main" style="width: 70%;" id="table5Div">
+            <div class="main-header">
+                <center>Products Delivery Details</center>
+            </div>
+            <div class="main-body">
+                <div class="main-body-row">
+
+                    <% if(Delivery != undefined && Delivery != "No details found" && Delivery.length != 0) { %>
+
+                        <table id="dealerTable">
+                            <thead>
+                                <tr>
+
+                                    <th>Date</th>
+                                    <th>Dealer Name</th>
+                                    <th>Phone Number</th>
+                                    <th>List</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < Delivery.length; i++) { %>
+
+
+                                    <tr>
+
+                                        <td>
+                                            <%= Delivery[i].date %>
+                                        </td>
+                                        <td>
+                                            <%= Delivery[i].name %>
+                                        </td>
+                                        <td>
+                                            <%= Delivery[i].phone %>
+                                        </td>
+                                        <p id="del" hidden>
+                                            <%= Delivery[i].phone %>
+                                        </p>
+                                        <td>
+                                            <table>
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product Name</th>
+                                                        <th>Capacity</th>
+                                                        <th>Quantity</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% Delivery[i].list=JSON.parse(Delivery[i].list) %>
+
+
+                                                        <% for(var j=0; j < Delivery[i].list.length; j++) { %>
+                                                            <% Delivery[i].list[j]=JSON.stringify(Delivery[i].list[j]) %>
+                                                                <% Delivery[i].list[j]=JSON.parse(Delivery[i].list[j]) %>
+
+                                                                    <% console.log(Delivery[i].list[j]+"hello")%>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%= Delivery[i].list[j].productName %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= Delivery[i].list[j].capacity %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%= Delivery[i].list[j].quantity %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% } %>
+
+
+                                                </tbody>
+
+
+                                            </table>
+
+
+                                        </td>
+
+                                    </tr>
+
+                                    <% } %>
+                            </tbody>
+                        </table>
+                        <% Delivery = undefined %>
+
+                            <% } %>
+
+                                <% if(Delivery != undefined || Delivery == "No details found") { %>
+                                    <center>
+                                        <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">No details found On this date</p>
+                                    </center>
+                                    <% }%>
+
+                </div>
+                <div class="main-body-row">
+                    <p id="errorMsg" style="color: red; font-style: bold; font-size: larger;"></p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src="/js/getdelivery.js"></script>
+</body>
+
+</html>

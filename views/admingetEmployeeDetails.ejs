@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Randam</title>
+    <link rel="stylesheet" href="/css/commonDBstyle.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #696969;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #c0fdf0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="cover-spin"></div>
+    <!-- partial:index.partial.html -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Sen&display=swap" rel="stylesheet">
+    <% var employee %>
+        <div class="app">
+            <div class="sidebar">
+
+                <a href="/admin/home" style="text-decoration: none;">
+                    <div class="button "><span class="material-icons">home</span>Home</div>
+                </a>
+                <div class="title">Delivery Details</div>
+                <a href="/admin/addDelivery" style="text-decoration: none;">
+                    <div class="button"><span class="material-icons">post_add</span>Add Delivery</div>
+                </a>
+                <a href="/admin/getDelivery" style="text-decoration: none;">
+                    <div class="button"><span class="material-icons">get_app</span>Get Delivery</div>
+                </a>
+                <div class="title">Person Details</div>
+                <a href="/admin/getEmployee" style="text-decoration: none;">
+
+                    <div class="button active" id="empButton"><span class="material-icons">badge</span> Employee Details</div>
+                </a>
+                <a href="/admin/getDealer" style="text-decoration: none;">
+                    <div class="button"><span class="material-icons">contact_mail</span> Dealer Details</div>
+                </a>
+                <div class="title">SignOut </div>
+                <a href="/admin/logout" style="text-decoration: none;">
+                    <div class="button"><span class="material-icons">logout</span> SignOut Now</div>
+                </a>
+            </div>
+
+
+            <div class="main" style="height: 200px;">
+                <div class="main-header">
+                    Get Employee Details
+                </div>
+
+                <div class="main-body">
+                    <form method="POST" action="/getEmployee">
+                        <div class="main-body-row">
+                            <div class="main-body-row-container">
+                                <span class="material-icons">badge</span>
+                                <input class="main-body-input" type="text" name="id" id="employeeid" required>
+                            </div>
+                        </div>
+
+                        <div class="main-body-row">
+                            <input type="submit" style="border: none;" class="main-body-button" value="Get Employee" onclick="$('#cover-spin').show(0);display();">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="main" style="width: 70%;" id="table3Div">
+                <div class="main-header">
+                    <center>Employee Details</center>
+                </div>
+                <% if(employee != undefined && employee != "No details found" && employee != "Deleted Successfully" && employee != "Deletion Failed") { %>
+                    <center>
+
+                        <table id="empTable">
+                            <thead>
+                                <tr>
+
+                                    <th>Employee Id</th>
+                                    <th>Employee Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Location</th>
+                                    <th>Remove Employee</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+
+                                    <th>
+                                        <%= employee.eId %>
+
+
+                                    </th>
+                                    <th>
+                                        <%= employee.name %>
+                                    </th>
+                                    <th>
+                                        <%= employee.phone %>
+                                    </th>
+                                    <th>
+                                        <%= employee.location %>
+                                    </th>
+                                    <th>
+                                        <form action="/deleteEmployee" method="POST">
+                                            <input type="hidden" name="id" id="empid">
+                                            <p id="eid" hidden>
+                                                <%= employee.eId %>
+                                            </p>
+                                            <script>
+                                                document.getElementById("empid").value = document.getElementById("eid").innerHTML.trim();
+                                            </script>
+                                            <input type="submit" onclick="$('#cover-spin').show(0)" value="Remove Employee" style="color: white; background: tomato;">
+                                        </form>
+                                    </th>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                        <% employee = undefined %>
+                    </center>
+                    <% } %>
+                        <% if(employee == "No details found" ) { %>
+                            <center>
+                                <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">No details found with the selected Employee Id</p>
+                            </center>
+                            <% employee = undefined %>
+                                <% }%>
+
+                                    <% if(employee == "Deleted Successfully" ) { %>
+                                        <center>
+                                            <p id="errorMsg" style="color: Green; font-style: bold; font-size: larger;">Employee Deleted Successfully</p>
+                                        </center>
+
+                                        <% employee = undefined %>
+                                            <% }%>
+                                                <% if(employee == "Deletion Failed" ) { %>
+                                                    <center>
+                                                        <p id="errorMsg" style="color: tomato; font-style: bold; font-size: larger;">Failed to delete employee</p>
+                                                    </center>
+
+                                                    <% employee = undefined %>
+                                                        <% }%>
+                                                            <div class="main-body">
+                                                                <div class="main-body-row">
+
+                                                                    <table id="empTable">
+
+                                                                    </table>
+
+                                                                </div>
+
+
+                                                            </div>
+            </div>
+
+
+        </div>
+        <!-- partial -->
+        <script src="/js/getEmployeeadmin.js"></script>
+</body>
+
+</html>
